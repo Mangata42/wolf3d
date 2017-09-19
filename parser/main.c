@@ -6,11 +6,13 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 11:41:20 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/19 17:14:39 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/19 17:49:48 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+void    compute_size()
 
 void    parser(int fd)
 {
@@ -30,7 +32,6 @@ void    parser(int fd)
     }
     buffer[ft_strlen(buffer) - 2] = 0;
     puts(buffer);
-    free(buffer);
 }
 
 int     main(int argc, char **argv)
