@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 11:27:45 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/18 20:00:26 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/19 11:28:17 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ int     loop_hook(t_env *env)
     env->fps = 60 / ((double)(env->time - env->oldTime) / CLOCKS_PER_SEC);
     env->player.movSpeed = 20 * ((double)(env->time - env->oldTime) / CLOCKS_PER_SEC);
     env->player.rotSpeed = 10 * ((double)(env->time - env->oldTime) / CLOCKS_PER_SEC);
-    // printf("fps : %d\n", env->fps);
+    printf("fps : %d\n", env->fps);
     return (0);
 }
 
