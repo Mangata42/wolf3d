@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 11:28:20 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/19 11:28:08 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/21 18:19:46 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@
 # define K_LEFT 123
 # define K_SPA 49
 
-/* MAP DIMENSION */
-# define MAP_WIDTH 24
-# define MAP_HEIGHT 24
 
 typedef struct  s_env       t_env;
 typedef struct  s_player    t_player;
@@ -135,6 +132,9 @@ struct          s_env
     int         sl;
     int         end;
     int         x;
+    int         **world_map;
+    int         map_w;
+    int         map_h;
     clock_t     time;
     clock_t     oldTime;
     int         fps;
@@ -146,10 +146,23 @@ struct          s_env
     t_keyboard  keyb;
 };
 
+void       ft_exit();
+void       error();
 void       ft_put_pixel(t_env *env, int x, int y, int color);
 void       ft_line(t_env *env, t_coords a, t_coords b, int color);
-int        ft_destroy(t_env *env);
-void       error();
+int        **open_arg(char **argv);
+void       init_env(t_env *env, char **argv);
+void       ft_init_player(t_env *env);
+void       ft_init_screen(t_env *env);
+void       ft_init_map(t_env *env);
+int        keypress_hook(int keycode, t_env *env);
+int        keyrelease_hook(int keycode, t_env *env);
+void       compute_fps(t_env *env);
+void       ft_determine_draw(t_env *env);
+void       ft_ray_dir(t_env *env);
+void       ft_ray_collision(t_env *env);
+int 		color_choice(t_env *env);
+void       ft_movements(t_env *env);
 
 
 #endif
