@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/19 11:41:20 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/21 18:02:16 by nghaddar         ###   ########.fr       */
+/*   Created: 2017/09/23 13:59:24 by Mangata           #+#    #+#             */
+/*   Updated: 2017/09/24 20:33:18 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/wolf3d.h"
 
@@ -73,7 +74,7 @@ void	verify_buffer(char *buffer)
 			&& ft_isdigit(buffer[i]) == 0)
 		{
 			ft_putstr("Well, sorry pal, your map is not suitable.\n");
-			ft_exit();
+			error();
 		}
 	}
 }
@@ -92,6 +93,7 @@ int		**parser(int fd)
 		buffer = ft_strcat(buffer, "\n");
 		free(line);
 	}
+	free(line);
 	buffer[ft_strlen(buffer) - 1] = 0;
 	verify_buffer(buffer);
 	map = compute_size(buffer);

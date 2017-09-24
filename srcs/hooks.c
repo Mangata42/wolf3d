@@ -6,45 +6,57 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 14:22:38 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/21 18:13:58 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/25 01:02:29 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-void	ft_exit(void)
+void	refresh_screen(t_env *env)
 {
-	system("killall afplay");
-	exit(EXIT_SUCCESS);
-}
-
-void	error(void)
-{
-	perror("error");
-	ft_exit();
-}
-
-int		ft_destroy(void)
-{
-	if (1)
+	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
+	mlx_put_image_to_window(env->mlx, env->win, env->chaingun[0].img, 320 
+		- (env->chaingun[0].width / 2), 640 - (env->chaingun[0].height));
+	if (env->holygrenade_sw == 1)
 	{
-		system("killall afplay");
-		exit(EXIT_SUCCESS);
+		mlx_put_image_to_window(env->mlx, env->win, env->holygrenade.img, 
+			320 - (env->holygrenade.height) / 2, 320 - (env->holygrenade.width) / 2);
+		holy_grenade(env);
 	}
+}
+
+int		loop_hook(t_env *env)
+{
+	ft_movements(env);
+	env->time = clock();
+	mlx_destroy_image(env->mlx, env->img);
+	load_textures(env);
+	env->x = 0;
+	while (env->x < WINDOW_WIDTH)
+	{
+		ft_init_screen(env);
+		ft_init_map(env);
+		ft_ray_dir(env);
+		ft_ray_collision(env);
+		ft_determine_draw(env);
+		env->draw.color = color_choice(env);
+		ft_line(env, env->draw.a, env->draw.b, env->draw.color);
+		draw_floor(env);
+		env->x++;
+	}
+	refresh_screen(env);
+	compute_fps(env);
 	return (0);
 }
 
 int		keypress_hook(int keycode, t_env *env)
 {
 	if (keycode == 18)
-	{
-		system("afplay ./music/nuke.mp3");
-		exit(EXIT_SUCCESS);
-	}
+		env->holygrenade_sw = 1;
 	if (keycode == K_ESC)
-		exit(EXIT_SUCCESS);
+		ft_exit(env);
 	if (keycode == K_SPA)
-		system("afplay ./music/9mm.wav&");
+		animate_chaingun(env);
 	if (keycode == K_UP)
 		env->keyb.k_up = 1;
 	if (keycode == K_DOWN)

@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:04:40 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/21 18:35:00 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/25 00:35:27 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void	init_env(t_env *env, char **argv)
 	env->time = 0;
 	env->oldTime = 0;
 	env->world_map = open_arg(argv);
+	env->holygrenade.img = mlx_xpm_file_to_image(env->mlx, "./textures/holygrenade.xpm",
+		&(env->holygrenade.width), &(env->holygrenade.height));
+	env->holygrenade_sw = 0;
+	load_chaingun(env);
 }
 
 void	ft_init_player(t_env *env)

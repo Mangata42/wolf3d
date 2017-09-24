@@ -6,11 +6,34 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 14:16:51 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/21 18:12:06 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/24 20:55:16 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
+
+void	animate_chaingun(t_env *env)
+{
+	int i; 
+
+	i = 0;
+	system("afplay ./music/chaingun.wav&");
+	system("afplay ./music/shell.wav&");
+	while (++i < 7)
+	{
+		mlx_put_image_to_window(env->mlx, env->win, env->chaingun[i].img, 320 
+			- (env->chaingun[i].width / 2), 640 - (env->chaingun[i].height));
+	}
+}
+
+void	draw_floor(t_env *env)
+{
+	int y;
+
+	y = env->draw.drawEnd - 1;
+	while (++y < WINDOW_HEIGHT)
+		ft_put_pixel(env, env->x, y, 0xf4a442);
+}
 
 int		color_choice(t_env *env)
 {

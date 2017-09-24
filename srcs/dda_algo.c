@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:09:27 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/21 18:12:01 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/24 23:36:46 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	compute_fps(t_env *env)
 {
+	char *fps_str;
+
 	env->oldTime = env->time;
 	env->time = clock();
 	env->fps = 60 / ((double)(env->time - env->oldTime) / CLOCKS_PER_SEC);
@@ -21,7 +23,11 @@ void	compute_fps(t_env *env)
 		((double)(env->time - env->oldTime) / CLOCKS_PER_SEC);
 	env->player.rotSpeed = 10 *
 		((double)(env->time - env->oldTime) / CLOCKS_PER_SEC);
-	printf("fps : %d\n", env->fps);
+	fps_str = ft_itoa(env->fps);
+	mlx_string_put(env->mlx, env->win, 3, 10, 0x00ff00, "FPS: ");
+	mlx_string_put(env->mlx, env->win, 50, 10, 0x00ff00, fps_str);
+	mlx_string_put(env->mlx, env->win, 320, 320, 0x0000ff, "X");
+	free(fps_str);
 }
 
 void	ft_determine_draw(t_env *env)
