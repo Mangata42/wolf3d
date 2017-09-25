@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 14:22:38 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/25 01:02:29 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/25 18:40:53 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,8 @@
 void	refresh_screen(t_env *env)
 {
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
-	mlx_put_image_to_window(env->mlx, env->win, env->chaingun[0].img, 320 
+	mlx_put_image_to_window(env->mlx, env->win, env->chaingun[0].img, 320
 		- (env->chaingun[0].width / 2), 640 - (env->chaingun[0].height));
-	if (env->holygrenade_sw == 1)
-	{
-		mlx_put_image_to_window(env->mlx, env->win, env->holygrenade.img, 
-			320 - (env->holygrenade.height) / 2, 320 - (env->holygrenade.width) / 2);
-		holy_grenade(env);
-	}
 }
 
 int		loop_hook(t_env *env)
@@ -44,6 +38,7 @@ int		loop_hook(t_env *env)
 		draw_floor(env);
 		env->x++;
 	}
+	draw_circle(320, 320, 10, env);
 	refresh_screen(env);
 	compute_fps(env);
 	return (0);
@@ -51,8 +46,6 @@ int		loop_hook(t_env *env)
 
 int		keypress_hook(int keycode, t_env *env)
 {
-	if (keycode == 18)
-		env->holygrenade_sw = 1;
 	if (keycode == K_ESC)
 		ft_exit(env);
 	if (keycode == K_SPA)

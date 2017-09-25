@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 14:16:51 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/24 20:55:16 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/25 18:37:50 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	animate_chaingun(t_env *env)
 {
-	int i; 
+	int i;
 
 	i = 0;
 	system("afplay ./music/chaingun.wav&");
 	system("afplay ./music/shell.wav&");
 	while (++i < 7)
 	{
-		mlx_put_image_to_window(env->mlx, env->win, env->chaingun[i].img, 320 
+		mlx_put_image_to_window(env->mlx, env->win, env->chaingun[i].img, 320
 			- (env->chaingun[i].width / 2), 640 - (env->chaingun[i].height));
 	}
 }
@@ -30,27 +30,27 @@ void	draw_floor(t_env *env)
 {
 	int y;
 
-	y = env->draw.drawEnd - 1;
+	y = env->draw.draw_end - 1;
 	while (++y < WINDOW_HEIGHT)
-		ft_put_pixel(env, env->x, y, 0xf4a442);
+		ft_put_pixel(env, env->x, y, 0x1E202A);
 }
 
 int		color_choice(t_env *env)
 {
 	if (env->map.side == 1)
 	{
-		if ((env->map.stepX == -1 && env->map.stepY == -1) ||
-			(env->map.stepX == 1 && env->map.stepY == -1))
-			return (0xF7FE2E);
-		if ((env->map.stepX == -1 && env->map.stepY == 1) ||
-			(env->map.stepX == 1 && env->map.stepY == 1))
-			return (0xff0000);
+		if ((env->map.step_x == -1 && env->map.step_y == -1) ||
+			(env->map.step_x == 1 && env->map.step_y == -1))
+			return (0x47244E);
+		if ((env->map.step_x == -1 && env->map.step_y == 1) ||
+			(env->map.step_x == 1 && env->map.step_y == 1))
+			return (0x5E82B0);
 	}
-	if ((env->map.stepX == -1 && env->map.stepY == -1) ||
-		(env->map.stepX == -1 && env->map.stepY == 1))
-		return (0x00ff00);
+	if ((env->map.step_x == -1 && env->map.step_y == -1) ||
+		(env->map.step_x == -1 && env->map.step_y == 1))
+		return (0xFF595E);
 	else
-		return (0xffffff);
+		return (0xFFCA3A);
 }
 
 void	ft_put_pixel(t_env *env, int x, int y, int color)

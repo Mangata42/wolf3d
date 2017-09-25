@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:12:44 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/24 23:27:24 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/25 18:41:47 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	key_up(t_env *env)
 {
-	if (!(env->world_map[(int)(env->player.posX + env->player.dirX
-		* env->player.movSpeed)][(int)(env->player.posY)]))
-		env->player.posX += env->player.dirX * env->player.movSpeed;
-	if (!(env->world_map[(int)(env->player.posX)][(int)(env->player.posY
-		+ env->player.dirY * env->player.movSpeed)]))
-		env->player.posY += env->player.dirY * env->player.movSpeed;
+	if (!(env->world_map[(int)(env->player.pos_x + env->player.dir_x
+		* env->player.movspeed)][(int)(env->player.pos_y)]))
+		env->player.pos_x += env->player.dir_x * env->player.movspeed;
+	if (!(env->world_map[(int)(env->player.pos_x)][(int)(env->player.pos_y
+		+ env->player.dir_y * env->player.movspeed)]))
+		env->player.pos_y += env->player.dir_y * env->player.movspeed;
 }
 
 void	key_down(t_env *env)
 {
-	if (!(env->world_map[(int)(env->player.posX - env->player.dirX
-		* env->player.movSpeed)][(int)(env->player.posY)]))
-		env->player.posX -= env->player.dirX * env->player.movSpeed;
-	if (!(env->world_map[(int)(env->player.posX)][(int)(env->player.posY
-		- env->player.dirY * env->player.movSpeed)]))
-		env->player.posY -= env->player.dirY * env->player.movSpeed;
+	if (!(env->world_map[(int)(env->player.pos_x - env->player.dir_x
+		* env->player.movspeed)][(int)(env->player.pos_y)]))
+		env->player.pos_x -= env->player.dir_x * env->player.movspeed;
+	if (!(env->world_map[(int)(env->player.pos_x)][(int)(env->player.pos_y
+		- env->player.dir_y * env->player.movspeed)]))
+		env->player.pos_y -= env->player.dir_y * env->player.movspeed;
 }
 
 void	key_right(t_env *env)
@@ -37,16 +37,16 @@ void	key_right(t_env *env)
 	double old_dir_x;
 	double old_plane_x;
 
-	old_dir_x = env->player.dirX;
-	old_plane_x = env->screen.planeX;
-	env->player.dirX = env->player.dirX * cos(-(env->player.rotSpeed))
-		- env->player.dirY * sin(-(env->player.rotSpeed));
-	env->player.dirY = old_dir_x * sin(-(env->player.rotSpeed))
-		+ env->player.dirY * cos(-(env->player.rotSpeed));
-	env->screen.planeX = env->screen.planeX * cos(-(env->player.rotSpeed))
-		- env->screen.planeY * sin(-(env->player.rotSpeed));
-	env->screen.planeY = old_plane_x * sin(-(env->player.rotSpeed))
-		+ env->screen.planeY * cos(-(env->player.rotSpeed));
+	old_dir_x = env->player.dir_x;
+	old_plane_x = env->screen.plane_x;
+	env->player.dir_x = env->player.dir_x * cos(-(env->player.rotspeed))
+		- env->player.dir_y * sin(-(env->player.rotspeed));
+	env->player.dir_y = old_dir_x * sin(-(env->player.rotspeed))
+		+ env->player.dir_y * cos(-(env->player.rotspeed));
+	env->screen.plane_x = env->screen.plane_x * cos(-(env->player.rotspeed))
+		- env->screen.plane_y * sin(-(env->player.rotspeed));
+	env->screen.plane_y = old_plane_x * sin(-(env->player.rotspeed))
+		+ env->screen.plane_y * cos(-(env->player.rotspeed));
 }
 
 void	key_left(t_env *env)
@@ -54,16 +54,16 @@ void	key_left(t_env *env)
 	double old_dir_x;
 	double old_plane_x;
 
-	old_dir_x = env->player.dirX;
-	old_plane_x = env->screen.planeX;
-	env->player.dirX = env->player.dirX * cos((env->player.rotSpeed))
-		- env->player.dirY * sin((env->player.rotSpeed));
-	env->player.dirY = old_dir_x * sin((env->player.rotSpeed))
-		+ env->player.dirY * cos(-(env->player.rotSpeed));
-	env->screen.planeX = env->screen.planeX * cos((env->player.rotSpeed))
-		- env->screen.planeY * sin((env->player.rotSpeed));
-	env->screen.planeY = old_plane_x * sin((env->player.rotSpeed))
-		+ env->screen.planeY * cos((env->player.rotSpeed));
+	old_dir_x = env->player.dir_x;
+	old_plane_x = env->screen.plane_x;
+	env->player.dir_x = env->player.dir_x * cos((env->player.rotspeed))
+		- env->player.dir_y * sin((env->player.rotspeed));
+	env->player.dir_y = old_dir_x * sin((env->player.rotspeed))
+		+ env->player.dir_y * cos(-(env->player.rotspeed));
+	env->screen.plane_x = env->screen.plane_x * cos((env->player.rotspeed))
+		- env->screen.plane_y * sin((env->player.rotspeed));
+	env->screen.plane_y = old_plane_x * sin((env->player.rotspeed))
+		+ env->screen.plane_y * cos((env->player.rotspeed));
 }
 
 void	ft_movements(t_env *env)

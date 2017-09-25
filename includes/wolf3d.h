@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 11:28:20 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/25 00:28:01 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/25 21:54:46 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,19 @@
 
 # include "libft.h"
 # include "mlx.h"
-# include "X11/X.h"
 # include <math.h>
 # include <time.h>
+# include <errno.h>
 
-/* SCREEN DIMENSION */
+/*
+**SCREEN DIMENSION
+*/
 # define WINDOW_HEIGHT 640
 # define WINDOW_WIDTH 640
 
-/*  KEY INPUTS  */
+/*
+**KEY INPUTS
+*/
 # define K_ESC 53
 # define K_UP 126
 # define K_DOWN 125
@@ -31,16 +35,18 @@
 # define K_LEFT 123
 # define K_SPA 49
 
+# define RET 0x0000ff
 
-typedef struct  s_env		t_env;
-typedef struct  s_player	t_player;
-typedef struct  s_screen	t_screen;
-typedef struct  s_map		t_map;
-typedef struct  s_coords	t_coords;
-typedef struct  s_line		t_line;
-typedef struct  s_draw		t_draw;
-typedef struct  s_img		t_img;
-typedef struct  s_keyboard	t_keyboard;
+typedef struct s_env		t_env;
+typedef struct s_player		t_player;
+typedef struct s_screen		t_screen;
+typedef struct s_map		t_map;
+typedef struct s_coords		t_coords;
+typedef struct s_circle		t_circle;
+typedef struct s_line		t_line;
+typedef struct s_draw		t_draw;
+typedef struct s_img		t_img;
+typedef struct s_keyboard	t_keyboard;
 
 struct						s_coords
 {
@@ -48,17 +54,25 @@ struct						s_coords
 	int	y;
 };
 
+struct						s_circle
+{
+	int cirx;
+	int ciry;
+	int cirdx;
+	int cirdy;
+	int cirerr;
+};
+
 struct						s_draw
 {
-	int			lineHeight;
-	int			drawStart;
-	int			drawEnd;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
 	int			color;
 	int			modifier;
 	t_coords	a;
 	t_coords	b;
 };
-
 
 struct						s_line
 {
@@ -72,38 +86,38 @@ struct						s_line
 
 struct						s_map
 {
-	int		mapX;
-	int		mapY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
-	int		stepX;
-	int		stepY;
+	int		map_x;
+	int		map_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	perpwalldist;
+	int		step_x;
+	int		step_y;
 	int		side;
 	int		hit;
 };
 
 struct						s_screen
 {
-	double	cameraX;
-	double	rayPosX;
-	double	rayPosY;
-	double	rayDirX;
-	double	rayDirY;
-	double	planeX;
-	double	planeY;
+	double	camera_x;
+	double	raypos_x;
+	double	raypos_y;
+	double	raydir_x;
+	double	raydir_y;
+	double	plane_x;
+	double	plane_y;
 };
 
 struct						s_player
 {
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	movSpeed;
-	double	rotSpeed;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	movspeed;
+	double	rotspeed;
 };
 
 struct						s_keyboard
@@ -136,15 +150,14 @@ struct						s_env
 	int			map_w;
 	int			map_h;
 	clock_t		time;
-	clock_t		oldTime;
+	clock_t		old_time;
 	int			fps;
-	int			holygrenade_sw;
+	t_circle	reticle;
 	t_player	player;
 	t_screen	screen;
 	t_map		map;
 	t_draw		draw;
 	t_img		text[1];
-	t_img		holygrenade;
 	t_img		chaingun[7];
 	t_keyboard	keyb;
 };
@@ -152,9 +165,11 @@ struct						s_env
 void						ft_exit(t_env *env);
 void						error(void);
 void						ft_put_pixel(t_env *env, int x, int y, int color);
-void						ft_line(t_env *env, t_coords a, t_coords b, int color);
-int							**open_arg(char **argv);
+void						ft_line(t_env *env, t_coords a,
+								t_coords b, int color);
+int							**open_arg(t_env *env, char **argv);
 void						init_env(t_env *env, char **argv);
+void						check_x(t_env *env, int ***map, int x, int y);
 void						ft_init_player(t_env *env);
 void						ft_init_screen(t_env *env);
 void						ft_init_map(t_env *env);
@@ -172,6 +187,6 @@ int							loop_hook(t_env *env);
 void						draw_floor(t_env *env);
 void						animate_chaingun(t_env *env);
 void						load_textures(t_env *env);
-void						holy_grenade(t_env *env);
+void						draw_circle(int x0, int y0, int radius, t_env *env);
 
 #endif

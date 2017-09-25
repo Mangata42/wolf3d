@@ -6,58 +6,82 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:04:40 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/25 00:35:27 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/25 23:42:00 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
+void	verify_limits(t_env *env)
+{
+	int x;
+	int y;
+
+	y = -1;
+	while (++y < env->map_h)
+	{
+		x = -1;
+		while (++x < env->map_w)
+			if (env->world_map[y][x] <= 0)
+				if ((x == 0 || x >= env->map_w - 1) || 
+					(y == 0 || y >= env->map_h - 1))
+						puts("error");
+	}
+}
+
 void	init_env(t_env *env, char **argv)
 {
 	env->mlx = mlx_init();
 	env->win = mlx_new_window(env->mlx, WINDOW_HEIGHT, WINDOW_WIDTH,
-		"le correcteur est gay");
+		"bonjour monsieur");
 	env->img = mlx_xpm_file_to_image(env->mlx, "./textures/space.xpm",
 		&(env->text[0].width), &(env->text[0].height));
 	env->img_datas = mlx_get_data_addr(env->img, &(env->bpp), &(env->sl),
 		&(env->end));
 	env->time = 0;
-	env->oldTime = 0;
-	env->world_map = open_arg(argv);
-	env->holygrenade.img = mlx_xpm_file_to_image(env->mlx, "./textures/holygrenade.xpm",
-		&(env->holygrenade.width), &(env->holygrenade.height));
-	env->holygrenade_sw = 0;
+	env->old_time = 0;
+	env->world_map = open_arg(env, argv);
+	verify_limits(env);
 	load_chaingun(env);
+}
+
+void	check_x(t_env *env, int ***map, int x, int y)
+{
+	*(map[y][x]) = 0;
+	env->player.pos_x = x;
+	env->player.pos_y = y;
 }
 
 void	ft_init_player(t_env *env)
 {
-	env->player.posX = 3;
-	env->player.posY = 3;
-	env->player.dirX = -1;
-	env->player.dirY = 0;
-	env->screen.planeX = 0;
-	env->screen.planeY = 0.66;
+	env->player.pos_x = 3;
+	env->player.pos_y = 3;
+	env->player.dir_x = -1;
+	env->player.dir_y = 0;
+	env->screen.plane_x = 0;
+	env->screen.plane_y = 0.66;
 }
 
 void	ft_init_screen(t_env *env)
 {
-	env->screen.cameraX = 2 * env->x / (double)WINDOW_WIDTH - 1;
-	env->screen.rayPosX = env->player.posX;
-	env->screen.rayPosY = env->player.posY;
-	env->screen.rayDirX = env->player.dirX +
-		env->screen.planeX * env->screen.cameraX;
-	env->screen.rayDirY = env->player.dirY
-		+ env->screen.planeY * env->screen.cameraX;
+	env->screen.camera_x = 2 * env->x / (double)WINDOW_WIDTH - 1;
+	env->screen.raypos_x = env->player.pos_x;
+	env->screen.raypos_y = env->player.pos_y;
+	env->screen.raydir_x = env->player.dir_x +
+		env->screen.plane_x * env->screen.camera_x;
+	env->screen.raydir_y = env->player.dir_y
+		+ env->screen.plane_y * env->screen.camera_x;
 }
 
 void	ft_init_map(t_env *env)
 {
-	env->map.mapX = (int)env->screen.rayPosX;
-	env->map.mapY = (int)env->screen.rayPosY;
-	env->map.deltaDistX = sqrt(1 + (env->screen.rayDirY * env->screen.rayDirY)
-		/ (env->screen.rayDirX * env->screen.rayDirX));
-	env->map.deltaDistY = sqrt(1 + (env->screen.rayDirX * env->screen.rayDirX)
-		/ (env->screen.rayDirY * env->screen.rayDirY));
+	env->map.map_x = (int)env->screen.raypos_x;
+	env->map.map_y = (int)env->screen.raypos_y;
+	env->map.deltadist_x = sqrt(1 + (env->screen.raydir_y
+		* env->screen.raydir_y)
+		/ (env->screen.raydir_x * env->screen.raydir_x));
+	env->map.deltadist_y = sqrt(1 + (env->screen.raydir_x
+		* env->screen.raydir_x)
+		/ (env->screen.raydir_y * env->screen.raydir_y));
 	env->map.hit = 0;
 }
