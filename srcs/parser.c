@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 13:59:24 by Mangata           #+#    #+#             */
-/*   Updated: 2017/09/26 12:32:46 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/26 12:43:55 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ void	verify_buffer(char *buffer)
 		{
 			errno = 22;
 			ft_putstr("Well, sorry pal, your map is not suitable.\n");
-			printf("wrong char : %c\n", buffer[i]);
+			ft_putstr("wrong char : ");
+			ft_putchar(buffer[i]);
+			ft_putstr("\n");
 			error();
 		}
 	}

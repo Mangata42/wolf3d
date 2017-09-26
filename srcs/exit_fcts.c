@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 20:53:43 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/26 12:35:09 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/26 14:05:08 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 
 void	ft_exit(t_env *env)
 {
-	int y;
-
-	y = -1;
-	while (++y < env->map_w)
-		free(env->world_map[y]);
-	free(env->world_map);
 	system("killall afplay");
 	exit(EXIT_SUCCESS);
 }
@@ -30,16 +24,5 @@ void	error(void)
 	ft_putnbr(errno);
 	ft_putchar('\n');
 	perror("error");
-	// system("killall afplay");
 	exit(EXIT_FAILURE);
-}
-
-int		ft_destroy(void)
-{
-	if (1)
-	{
-		system("killall afplay");
-		exit(EXIT_SUCCESS);
-	}
-	return (0);
 }

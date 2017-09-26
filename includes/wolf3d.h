@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 11:28:20 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/26 11:18:07 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/26 13:40:42 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # define K_SPA 49
 
 # define RET 0x0000ff
+
+# define MOV_SPEED 12
+# define ROT_SPEED 8
 
 typedef struct s_env		t_env;
 typedef struct s_player		t_player;

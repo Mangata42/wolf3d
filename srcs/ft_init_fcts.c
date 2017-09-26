@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:04:40 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/26 12:32:56 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/26 13:57:11 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	init_env(t_env *env, char **argv)
 		&(env->text[0].width), &(env->text[0].height));
 	env->img_datas = mlx_get_data_addr(env->img, &(env->bpp), &(env->sl),
 		&(env->end));
+	if ((!env->mlx) || (!env->win) || (!env->img))
+	{
+		ft_putstr("Failed to init mlx.\n");
+		error();
+	}
 	env->time = 0;
 	env->old_time = 0;
 	load_chaingun(env);
