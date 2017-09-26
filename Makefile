@@ -6,51 +6,55 @@
 #    By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/04 17:19:03 by nghaddar          #+#    #+#              #
-#    Updated: 2017/09/26 12:28:18 by nghaddar         ###   ########.fr        #
+#    Updated: 2017/09/26 16:16:47 by nghaddar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = dda_algo.c\
-		ft_init_fcts.c\
-		main.c\
-		parser.c\
-		draw.c\
-		hooks.c\
-		make_it_move.c \
-		exit_fcts.c \
-		reticle.c \
-		parsing_verif.c
-SRCS_D = $(addprefix ./srcs/, $(SRCS))
-FLAGS = no
-COMPIL_LIBS = no
-NAME = wolf3d
-LIBFT_DIR = ./libs/libft/
-MLX_DIR = ./libs/mlx
-LIBS = -framework OpenGL -framework AppKit -L $(LIBFT_DIR) -l ft -L $(MLX_DIR) -l mlx
+NAME=wolf3d
+CC=gcc
+SRC= ./srcs/dda_algo.c \
+	./srcs/ft_init_fcts.c \
+	./srcs/main.c \
+	./srcs/parser.c \
+	./srcs/draw.c \
+	./srcs/hooks.c \
+	./srcs/make_it_move.c \
+	./srcs/exit_fcts.c \
+	./srcs/reticle.c \
+	./srcs/parsing_verif.c
 
-$(NAME):
-ifeq ($(COMPIL_LIBS), yes)
-	make -C $(LIBFT_DIR)
-	make -C $(MLX_DIR)
-endif
-ifeq ($(FLAGS), yes)
-	gcc -Wall -Wextra -Werror $(LIBS) $(SRCS_D) -o $(NAME)
-else
-	gcc $(LIBS) $(SRCS_D) -o $(NAME)
-endif
+OBJ= dda_algo.o \
+	 ft_init_fcts.o \
+	 main.o \
+	 parser.o \
+	 draw.o \
+	 hooks.o \
+	 make_it_move.o \
+	 exit_fcts.o \
+	 reticle.o \
+	 parsing_verif.o
 
-clean:
-	make -C $(LIBFT_DIR) clean
-
-fclean:
-ifeq ($(COMPIL_LIBS), yes)
-	make -C $(LIBFT_DIR) fclean
-	make -C $(MLX_DIR) clean
-endif
-	rm -rf $(NAME)
-
-re: fclean all
+FLAGS= -Wall -Wextra -Werror
+LIB= -L ./libs/libft -lft
+MLX= -L ./libs/mlx -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
-.PHONY: clean fclean re
+$(NAME): $(OBJ)
+	@ echo "\033[92m\t\t\t---> ✓ libft created. ✓ <---\033[0m"
+	@ make -C ./libs/libft
+	@ echo "\033[92m\t---> ✓ wolf3d program has been successfully created. ✓ <---\033[0m"
+	@ $(CC) $(FLAGS) $(OBJ) -o $(NAME) $(MLX) $(LIB)
+$(OBJ): $(SRC)
+	@ $(CC) $(FLAGS) -c $(SRC)
+clean:
+	@ echo "\033[1;33m---> All .o files cleared. ✓ <---\033[0m"
+	@ rm -f $(OBJ)
+	@ make -C ./libs/libft clean
+fclean: clean
+	@ echo "\033[1;33m---> Everything has been cleared. ✓ <---\033[2;00m"
+	@ rm -f $(NAME)
+	@ make -C ./libs/libft fclean
+re: fclean all
+
+.PHONY: clean, fclean, re

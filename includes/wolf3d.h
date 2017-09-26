@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 11:28:20 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/26 13:40:42 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/26 15:43:59 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ struct						s_env
 	t_keyboard	keyb;
 };
 
-void						ft_exit(t_env *env);
+int							ft_exit(void);
 void						error(void);
 void						ft_put_pixel(t_env *env, int x, int y, int color);
 void						ft_line(t_env *env, t_coords a,

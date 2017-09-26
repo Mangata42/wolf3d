@@ -6,16 +6,17 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 20:53:43 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/26 14:05:08 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/26 15:44:04 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-void	ft_exit(t_env *env)
+int		ft_exit(void)
 {
 	system("killall afplay");
 	exit(EXIT_SUCCESS);
+	return (0);
 }
 
 void	error(void)

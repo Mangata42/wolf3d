@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 14:22:38 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/26 13:55:37 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/26 15:44:32 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		loop_hook(t_env *env)
 int		keypress_hook(int keycode, t_env *env)
 {
 	if (keycode == K_ESC)
-		ft_exit(env);
+		ft_exit();
 	if (keycode == K_SPA)
 		animate_chaingun(env);
 	if (keycode == K_UP)
