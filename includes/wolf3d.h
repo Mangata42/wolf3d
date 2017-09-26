@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 11:28:20 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/25 21:54:46 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/26 11:18:07 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,5 +188,6 @@ void						draw_floor(t_env *env);
 void						animate_chaingun(t_env *env);
 void						load_textures(t_env *env);
 void						draw_circle(int x0, int y0, int radius, t_env *env);
+void						verify_limits(t_env *env);
 
 #endif

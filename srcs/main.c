@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 11:27:45 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/25 21:17:38 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/26 11:34:03 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		main(int argc, char **argv)
 		error();
 	}
 	init_env(&env, argv);
-	system("afplay ./music/ingame.mp3&");
+	// system("afplay ./music/ingame.mp3&");
 	ft_init_player(&env);
 	mlx_hook(env.win, 2, (1L << 0), keypress_hook, &env);
 	mlx_hook(env.win, 3, (1L << 1), keyrelease_hook, &env);

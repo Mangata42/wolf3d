@@ -6,28 +6,11 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:04:40 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/25 23:42:00 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/26 11:43:40 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-
-void	verify_limits(t_env *env)
-{
-	int x;
-	int y;
-
-	y = -1;
-	while (++y < env->map_h)
-	{
-		x = -1;
-		while (++x < env->map_w)
-			if (env->world_map[y][x] <= 0)
-				if ((x == 0 || x >= env->map_w - 1) || 
-					(y == 0 || y >= env->map_h - 1))
-						puts("error");
-	}
-}
 
 void	init_env(t_env *env, char **argv)
 {
@@ -54,8 +37,6 @@ void	check_x(t_env *env, int ***map, int x, int y)
 
 void	ft_init_player(t_env *env)
 {
-	env->player.pos_x = 3;
-	env->player.pos_y = 3;
 	env->player.dir_x = -1;
 	env->player.dir_y = 0;
 	env->screen.plane_x = 0;

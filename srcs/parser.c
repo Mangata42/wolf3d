@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 13:59:24 by Mangata           #+#    #+#             */
-/*   Updated: 2017/09/25 23:14:45 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/26 12:01:44 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		**convert_buffer(t_env *env, int **map, char *buffer)
 			{
 				map[a][b] = buffer[i] - 48;
 				(buffer[i] == 'x') ? (map[a][b] = 0) : (1);
+				(buffer[i] == 'x') ? (env->player.pos_x = a + 0.5) : (1);
+				(buffer[i] == 'x') ? (env->player.pos_y = b + 0.5) : (1);
 				b++;
 			}
 		}

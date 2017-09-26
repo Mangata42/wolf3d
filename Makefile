@@ -6,7 +6,7 @@
 #    By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/04 17:19:03 by nghaddar          #+#    #+#              #
-#    Updated: 2017/09/25 21:22:10 by nghaddar         ###   ########.fr        #
+#    Updated: 2017/09/26 11:17:32 by nghaddar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRCS = dda_algo.c\
 		hooks.c\
 		make_it_move.c \
 		exit_fcts.c \
-		reticle.c
+		reticle.c \
+		parsing_verif.c
 SRCS_D = $(addprefix ./srcs/, $(SRCS))
 FLAGS = yes
 COMPIL_LIBS = no
