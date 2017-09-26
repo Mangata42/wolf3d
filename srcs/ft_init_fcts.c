@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 18:04:40 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/26 11:43:40 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/26 12:32:56 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	init_env(t_env *env, char **argv)
 {
 	env->mlx = mlx_init();
+	env->world_map = open_arg(env, argv);
+	verify_limits(env);
 	env->win = mlx_new_window(env->mlx, WINDOW_HEIGHT, WINDOW_WIDTH,
 		"bonjour monsieur");
 	env->img = mlx_xpm_file_to_image(env->mlx, "./textures/space.xpm",
@@ -23,8 +25,6 @@ void	init_env(t_env *env, char **argv)
 		&(env->end));
 	env->time = 0;
 	env->old_time = 0;
-	env->world_map = open_arg(env, argv);
-	verify_limits(env);
 	load_chaingun(env);
 }
 

@@ -6,7 +6,7 @@
 #    By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/04 17:19:03 by nghaddar          #+#    #+#              #
-#    Updated: 2017/09/26 11:17:32 by nghaddar         ###   ########.fr        #
+#    Updated: 2017/09/26 12:28:18 by nghaddar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS = dda_algo.c\
 		reticle.c \
 		parsing_verif.c
 SRCS_D = $(addprefix ./srcs/, $(SRCS))
-FLAGS = yes
+FLAGS = no
 COMPIL_LIBS = no
 NAME = wolf3d
 LIBFT_DIR = ./libs/libft/

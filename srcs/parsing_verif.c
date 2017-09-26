@@ -6,17 +6,11 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 11:15:45 by nghaddar          #+#    #+#             */
-/*   Updated: 2017/09/26 12:08:55 by nghaddar         ###   ########.fr       */
+/*   Updated: 2017/09/26 12:34:06 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-
-void	verify_x_start(t_env *env)
-{
-	printf("x = %f  y = %f\n", env->player.pos_x, env->player.pos_y);
-	// if (env->player.pos_x <= 0 || env->player.pos_x >= =)
-}
 
 void	verify_limits(t_env *env)
 {
@@ -37,5 +31,4 @@ void	verify_limits(t_env *env)
 					error();
 				}
 	}
-	verify_x_start(env);
 }
